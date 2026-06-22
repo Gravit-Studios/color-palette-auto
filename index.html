@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Palette Generator — Light & Dark</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Color Palette Generator</h1>
+    <p>Gere variações de cores com tokens semânticos para light e dark mode.</p>
+  </header>
+
+  <main>
+    <section class="controls">
+      <div class="control-row">
+        <div class="field">
+          <label for="bc">Cor base</label>
+          <input type="color" id="bc" value="#5B6AF5">
+        </div>
+        <div class="field">
+          <label for="hx">Hex</label>
+          <input type="text" id="hx" value="#5B6AF5" placeholder="#000000" maxlength="7">
+        </div>
+        <div class="field actions">
+          <button class="btn-primary" onclick="gen()">Gerar paleta</button>
+          <button class="btn-secondary" onclick="rnd()">Aleatória</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="tabs">
+      <button class="tab active" onclick="tab('tokens', this)">Tokens</button>
+      <button class="tab" onclick="tab('scale', this)">Escala</button>
+      <button class="tab" onclick="tab('preview', this)">Pré-visualização</button>
+      <button class="tab" onclick="tab('export', this)">Exportar</button>
+    </div>
+
+    <section id="t-tokens" class="tab-content">
+      <div class="two-col">
+        <div>
+          <div class="mode-title">☀️ Light mode</div>
+          <div class="token-frame" id="lt-frame"></div>
+        </div>
+        <div>
+          <div class="mode-title">🌙 Dark mode</div>
+          <div class="token-frame" id="dk-frame"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="t-scale" class="tab-content hidden">
+      <div class="scale-label">Escala completa (50 → 950)</div>
+      <div class="scale-row" id="scale-row"></div>
+      <div class="scale-stops">
+        <span>50</span><span>100</span><span>200</span><span>300</span><span>400</span>
+        <span>500</span><span>600</span><span>700</span><span>800</span><span>900</span><span>950</span>
+      </div>
+      <div class="two-col" style="margin-top:1.5rem">
+        <div>
+          <div class="mode-title">Recomendados — light</div>
+          <div id="rec-light"></div>
+        </div>
+        <div>
+          <div class="mode-title">Recomendados — dark</div>
+          <div id="rec-dark"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="t-preview" class="tab-content hidden">
+      <div class="two-col" id="preview-grid"></div>
+    </section>
+
+    <section id="t-export" class="tab-content hidden">
+      <div class="export-actions">
+        <button class="btn-secondary" onclick="exp('css')">CSS variables</button>
+        <button class="btn-secondary" onclick="exp('tailwind')">Tailwind</button>
+        <button class="btn-secondary" onclick="exp('json')">JSON</button>
+        <button class="btn-secondary" onclick="exp('figma')">Figma tokens</button>
+      </div>
+      <pre class="export-area" id="exp-area">Escolha um formato acima.</pre>
+      <button class="btn-secondary" style="margin-top:8px" onclick="copyExport()">Copiar código</button>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="palette.js"></script>
+</body>
+</html>
