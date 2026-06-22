@@ -7,12 +7,14 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
   <header>
     <h1>Color Palette Generator</h1>
-    <p>Gere variações de cores com tokens semânticos para light e dark mode.</p>
+    <p>Escala 100–900 com paletas separadas para light e dark mode.</p>
   </header>
 
   <main>
+    <!-- Controls -->
     <section class="controls">
       <div class="control-row">
         <div class="field">
@@ -30,49 +32,46 @@
       </div>
     </section>
 
+    <!-- Tabs -->
     <div class="tabs">
-      <button class="tab active" onclick="tab('tokens', this)">Tokens</button>
-      <button class="tab" onclick="tab('scale', this)">Escala</button>
-      <button class="tab" onclick="tab('preview', this)">Pré-visualização</button>
-      <button class="tab" onclick="tab('export', this)">Exportar</button>
+      <button class="tab active" onclick="tab('scale',this)">Escala</button>
+      <button class="tab" onclick="tab('tokens',this)">Tokens</button>
+      <button class="tab" onclick="tab('preview',this)">Pré-visualização</button>
+      <button class="tab" onclick="tab('export',this)">Exportar</button>
     </div>
 
-    <section id="t-tokens" class="tab-content">
+    <!-- Tab: Escala -->
+    <section id="t-scale" class="tab-content">
+      <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;">
+        <div id="band-light"></div>
+        <div id="band-dark"></div>
+      </div>
+      <div class="two-col">
+        <div id="scale-light"></div>
+        <div id="scale-dark"></div>
+      </div>
+    </section>
+
+    <!-- Tab: Tokens -->
+    <section id="t-tokens" class="tab-content hidden">
       <div class="two-col">
         <div>
-          <div class="mode-title">☀️ Light mode</div>
+          <div class="mode-title">☀️ Light mode — tokens semânticos</div>
           <div class="token-frame" id="lt-frame"></div>
         </div>
         <div>
-          <div class="mode-title">🌙 Dark mode</div>
+          <div class="mode-title">🌙 Dark mode — tokens semânticos</div>
           <div class="token-frame" id="dk-frame"></div>
         </div>
       </div>
     </section>
 
-    <section id="t-scale" class="tab-content hidden">
-      <div class="scale-label">Escala completa (50 → 950)</div>
-      <div class="scale-row" id="scale-row"></div>
-      <div class="scale-stops">
-        <span>50</span><span>100</span><span>200</span><span>300</span><span>400</span>
-        <span>500</span><span>600</span><span>700</span><span>800</span><span>900</span><span>950</span>
-      </div>
-      <div class="two-col" style="margin-top:1.5rem">
-        <div>
-          <div class="mode-title">Recomendados — light</div>
-          <div id="rec-light"></div>
-        </div>
-        <div>
-          <div class="mode-title">Recomendados — dark</div>
-          <div id="rec-dark"></div>
-        </div>
-      </div>
-    </section>
-
+    <!-- Tab: Preview -->
     <section id="t-preview" class="tab-content hidden">
       <div class="two-col" id="preview-grid"></div>
     </section>
 
+    <!-- Tab: Export -->
     <section id="t-export" class="tab-content hidden">
       <div class="export-actions">
         <button class="btn-secondary" onclick="exp('css')">CSS variables</button>
@@ -86,7 +85,6 @@
   </main>
 
   <div class="toast" id="toast"></div>
-
   <script src="palette.js"></script>
 </body>
 </html>
