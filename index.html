@@ -3,86 +3,150 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Color Palette Generator — Light & Dark</title>
+  <title>Paleta — Gerador de cores light & dark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <header>
-    <h1>Color Palette Generator</h1>
-    <p>Escala 100–900 com paletas separadas para light e dark mode.</p>
-  </header>
+  <div class="app">
 
-  <main>
-    <!-- Controls -->
-    <section class="controls">
-      <div class="control-row">
-        <div class="field">
-          <label for="bc">Cor base</label>
-          <input type="color" id="bc" value="#5B6AF5">
-        </div>
-        <div class="field">
-          <label for="hx">Hex</label>
-          <input type="text" id="hx" value="#5B6AF5" placeholder="#000000" maxlength="7">
-        </div>
-        <div class="field actions">
-          <button class="btn-primary" onclick="gen()">Gerar paleta</button>
-          <button class="btn-secondary" onclick="rnd()">Aleatória</button>
-        </div>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-dot" id="brand-dot"></span>
+        <span class="brand-name">Paleta</span>
       </div>
-    </section>
 
-    <!-- Tabs -->
-    <div class="tabs">
-      <button class="tab active" onclick="tab('scale',this)">Escala</button>
-      <button class="tab" onclick="tab('tokens',this)">Tokens</button>
-      <button class="tab" onclick="tab('preview',this)">Pré-visualização</button>
-      <button class="tab" onclick="tab('export',this)">Exportar</button>
-    </div>
-
-    <!-- Tab: Escala -->
-    <section id="t-scale" class="tab-content">
-      <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px;">
-        <div id="band-light"></div>
-        <div id="band-dark"></div>
-      </div>
-      <div class="two-col">
-        <div id="scale-light"></div>
-        <div id="scale-dark"></div>
-      </div>
-    </section>
-
-    <!-- Tab: Tokens -->
-    <section id="t-tokens" class="tab-content hidden">
-      <div class="two-col">
-        <div>
-          <div class="mode-title">☀️ Light mode — tokens semânticos</div>
-          <div class="token-frame" id="lt-frame"></div>
+      <div class="picker-wrap">
+        <label class="picker-label">Cor base</label>
+        <div class="picker-row">
+          <div class="color-thumb-wrap">
+            <input type="color" id="bc" value="#5B6AF5">
+            <div class="color-thumb" id="color-thumb"></div>
+          </div>
+          <input type="text" id="hx" value="#5B6AF5" class="hex-input" maxlength="7" spellcheck="false">
         </div>
-        <div>
-          <div class="mode-title">🌙 Dark mode — tokens semânticos</div>
-          <div class="token-frame" id="dk-frame"></div>
+        <div class="hsl-readout" id="hsl-readout"></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn-gen" onclick="gen()">Gerar paleta</button>
+        <button class="btn-rnd" onclick="rnd()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+          Aleatória
+        </button>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" onclick="tab('scale',this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="18" rx="1"/><rect x="14" y="3" width="7" height="18" rx="1"/></svg>
+          Escala
+        </button>
+        <button class="nav-item" onclick="tab('tokens',this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          Tokens
+        </button>
+        <button class="nav-item" onclick="tab('preview',this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Preview
+        </button>
+        <button class="nav-item" onclick="tab('export',this)">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Exportar
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="sidebar-footer-label">Escala 100 → 900</div>
+        <div class="mini-scale" id="mini-scale"></div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="content">
+
+      <!-- Scale tab -->
+      <section id="t-scale" class="tab-content">
+        <div class="content-header">
+          <h2>Escala de cores</h2>
+          <p>100 é o tom mais claro, 900 o mais escuro. Clique em qualquer cor para copiar o hex.</p>
         </div>
-      </div>
-    </section>
 
-    <!-- Tab: Preview -->
-    <section id="t-preview" class="tab-content hidden">
-      <div class="two-col" id="preview-grid"></div>
-    </section>
+        <div class="band-section">
+          <div class="band-label">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+            Light
+          </div>
+          <div class="band" id="band-light"></div>
+          <div class="band-label" style="margin-top:16px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            Dark
+          </div>
+          <div class="band" id="band-dark"></div>
+        </div>
 
-    <!-- Tab: Export -->
-    <section id="t-export" class="tab-content hidden">
-      <div class="export-actions">
-        <button class="btn-secondary" onclick="exp('css')">CSS variables</button>
-        <button class="btn-secondary" onclick="exp('tailwind')">Tailwind</button>
-        <button class="btn-secondary" onclick="exp('json')">JSON</button>
-        <button class="btn-secondary" onclick="exp('figma')">Figma tokens</button>
-      </div>
-      <pre class="export-area" id="exp-area">Escolha um formato acima.</pre>
-      <button class="btn-secondary" style="margin-top:8px" onclick="copyExport()">Copiar código</button>
-    </section>
-  </main>
+        <div class="scale-grid">
+          <div class="scale-col" id="scale-light"></div>
+          <div class="scale-col" id="scale-dark"></div>
+        </div>
+      </section>
+
+      <!-- Tokens tab -->
+      <section id="t-tokens" class="tab-content hidden">
+        <div class="content-header">
+          <h2>Tokens semânticos</h2>
+          <p>Papéis de cor prontos para usar em design systems e código.</p>
+        </div>
+        <div class="tokens-grid">
+          <div>
+            <div class="col-label light-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+              Light mode
+            </div>
+            <div id="lt-frame"></div>
+          </div>
+          <div>
+            <div class="col-label dark-label">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+              Dark mode
+            </div>
+            <div id="dk-frame"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Preview tab -->
+      <section id="t-preview" class="tab-content hidden">
+        <div class="content-header">
+          <h2>Pré-visualização</h2>
+          <p>Como a paleta se comporta em componentes reais.</p>
+        </div>
+        <div class="preview-duo" id="preview-grid"></div>
+      </section>
+
+      <!-- Export tab -->
+      <section id="t-export" class="tab-content hidden">
+        <div class="content-header">
+          <h2>Exportar</h2>
+          <p>Copie os tokens no formato do seu projeto.</p>
+        </div>
+        <div class="format-pills">
+          <button class="pill active-pill" onclick="exp('css',this)">CSS variables</button>
+          <button class="pill" onclick="exp('tailwind',this)">Tailwind</button>
+          <button class="pill" onclick="exp('json',this)">JSON</button>
+          <button class="pill" onclick="exp('figma',this)">Figma tokens</button>
+        </div>
+        <div class="code-wrap">
+          <button class="copy-code-btn" onclick="copyExport()" id="copy-btn">Copiar</button>
+          <pre class="export-area" id="exp-area">Escolha um formato acima.</pre>
+        </div>
+      </section>
+
+    </main>
+  </div>
 
   <div class="toast" id="toast"></div>
   <script src="palette.js"></script>
