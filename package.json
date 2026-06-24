@@ -4,7 +4,7 @@
   "description": "Ferramenta para gerar variações de cores com tokens semânticos para light e dark mode.",
   "main": "palette.js",
   "scripts": {
-    "build": "sass src/scss/main.scss dist/style.css --style=expanded --no-source-map --silence-deprecation=import && sass src/scss/main.scss dist/style.min.css --style=compressed --no-source-map --silence-deprecation=import",
+    "build": "sass src/scss/main.scss dist/style.css --style=expanded --no-source-map --silence-deprecation=import && sass src/scss/main.scss dist/style.min.css --style=compressed --no-source-map --silence-deprecation=import && cp dist/style.css style.css && cp dist/style.min.css style.min.css",
     "watch": "sass src/scss/main.scss dist/style.css --watch --no-source-map --silence-deprecation=import",
     "build:prod": "npm run build"
   },
