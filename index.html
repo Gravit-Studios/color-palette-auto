@@ -3,14 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paleta — Gerador de cores light & dark</title>
+  <title>Paleta — Gerador de cores</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="dist/style.min.css">
 </head>
 <body>
 
 <div class="app">
+
+  <!-- Header -->
+  <header class="page-header">
+    <h1 class="page-header__title">Gerador de paleta de cores</h1>
+    <p class="page-header__sub">Escala 100–900 com tokens semânticos para light e dark mode.</p>
+  </header>
 
   <!-- Controls -->
   <div class="controls">
@@ -27,29 +34,34 @@
       <input type="text" class="hex-input" id="hx" value="#5B6AF5" maxlength="7" spellcheck="false">
     </div>
 
+    <div class="field field--hsl">
+      <span class="field__label">HSL</span>
+      <div class="hsl-val" id="hsl-val">—</div>
+    </div>
+
     <div class="field field--actions">
-      <button class="btn btn--primary" onclick="gen()">Gerar</button>
+      <button class="btn btn--primary" onclick="gen()">Gerar paleta</button>
       <button class="btn btn--secondary" onclick="rnd()">Aleatória</button>
     </div>
   </div>
 
   <!-- Tabs -->
   <div class="tabs">
-    <button class="tab is-active" onclick="switchTab('tokens', this)">Tokens</button>
-    <button class="tab" onclick="switchTab('scale', this)">Escala</button>
-    <button class="tab" onclick="switchTab('preview', this)">Pré-visualização</button>
-    <button class="tab" onclick="switchTab('export', this)">Exportar</button>
+    <button class="tab is-active"  onclick="switchTab('tokens',  this)">Tokens</button>
+    <button class="tab"            onclick="switchTab('scale',   this)">Escala</button>
+    <button class="tab"            onclick="switchTab('preview', this)">Pré-visualização</button>
+    <button class="tab"            onclick="switchTab('export',  this)">Exportar</button>
   </div>
 
   <!-- Tab: Tokens -->
   <div id="t-tokens" class="tab-content">
-    <div class="tokens-section two-col">
+    <div class="tokens-grid">
       <div>
-        <div class="col-heading">Light mode</div>
+        <div class="col-heading">☀️ Light mode</div>
         <div class="token-table" id="lt-frame"></div>
       </div>
       <div>
-        <div class="col-heading">Dark mode</div>
+        <div class="col-heading">🌙 Dark mode</div>
         <div class="token-table token-table--dark" id="dk-frame"></div>
       </div>
     </div>
@@ -57,16 +69,18 @@
 
   <!-- Tab: Escala -->
   <div id="t-scale" class="tab-content is-hidden">
-    <div class="band-wrap">
-      <div class="band-label">☀️ Light — 100 ao 900</div>
-      <div class="band" id="band-light"></div>
+    <div class="band-pair">
+      <div class="band-row">
+        <div class="section-label">☀️ Light — 100 ao 900</div>
+        <div class="band" id="band-light"></div>
+      </div>
+      <div class="band-row">
+        <div class="section-label">🌙 Dark — 100 ao 900</div>
+        <div class="band" id="band-dark"></div>
+      </div>
     </div>
-    <div class="band-wrap">
-      <div class="band-label">🌙 Dark — 100 ao 900</div>
-      <div class="band" id="band-dark"></div>
-    </div>
-    <div class="two-col">
-      <div class="scale-list" id="scale-light"></div>
+    <div class="scale-grid">
+      <div class="scale-list"           id="scale-light"></div>
       <div class="scale-list scale-list--dark" id="scale-dark"></div>
     </div>
   </div>
@@ -79,10 +93,10 @@
   <!-- Tab: Exportar -->
   <div id="t-export" class="tab-content is-hidden">
     <div class="format-pills">
-      <button class="pill is-active" onclick="exp('css', this)">CSS variables</button>
-      <button class="pill" onclick="exp('tailwind', this)">Tailwind</button>
-      <button class="pill" onclick="exp('json', this)">JSON</button>
-      <button class="pill" onclick="exp('figma', this)">Figma tokens</button>
+      <button class="pill is-active" onclick="exp('css',this)">CSS variables</button>
+      <button class="pill"           onclick="exp('tailwind',this)">Tailwind</button>
+      <button class="pill"           onclick="exp('json',this)">JSON</button>
+      <button class="pill"           onclick="exp('figma',this)">Figma tokens</button>
     </div>
     <div class="code-wrap">
       <button class="copy-btn" id="copy-btn" onclick="copyExport()">Copiar</button>

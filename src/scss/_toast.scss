@@ -1,22 +1,21 @@
 @use 'variables' as *;
-// ── Toast notification ────────────────────────────────────────────────────────
+
 .toast {
   position: fixed;
-  bottom: $space-5;
-  right: $space-5;
+  bottom: $sp5;
+  right: $sp5;
   background: $gray-900;
   color: $white;
-  padding: $space-2 + 2 $space-4;
-  border-radius: $radius-lg;
+  padding: $sp2 + 1 $sp4;
+  border-radius: $r-lg;
   font-size: 13px;
   font-weight: 500;
   opacity: 0;
   pointer-events: none;
   transform: translateY(6px);
   transition: opacity .2s, transform .2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,.15);
+  z-index: 100;
 
-  &.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  &.is-visible { opacity: 1; transform: translateY(0); }
 }

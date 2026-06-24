@@ -1,27 +1,27 @@
 @use 'variables' as *;
-// ── Color band ────────────────────────────────────────────────────────────────
-.band-wrap {
-  margin-bottom: $space-6;
+
+// ── Band ──────────────────────────────────────────────────────────────────────
+.band-section { margin-bottom: $sp8; }
+
+.band-pair {
+  display: flex;
+  flex-direction: column;
+  gap: $sp3;
+  margin-bottom: $sp6;
 }
 
-.band-label {
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .07em;
-  color: $gray-400;
-  margin-bottom: $space-2;
+.band-row {
   display: flex;
-  align-items: center;
-  gap: $space-1 + 2;
+  flex-direction: column;
+  gap: $sp2;
 }
 
 .band {
   display: flex;
-  border-radius: $radius-xl;
+  border-radius: $r-xl;
   overflow: hidden;
-  height: 56px;
-  gap: 0;
+  height: 52px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.06);
 }
 
 .band-swatch {
@@ -30,12 +30,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding-bottom: $space-1 + 2;
+  padding-bottom: 7px;
   cursor: pointer;
-  transition: flex .18s ease;
+  transition: flex .2s cubic-bezier(.4,0,.2,1);
   position: relative;
 
-  &:hover { flex: 2.2; }
+  &:hover { flex: 2.4; }
 
   .band-stop {
     font-size: 9px;
@@ -50,63 +50,77 @@
 }
 
 // ── Scale list ────────────────────────────────────────────────────────────────
+.scale-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $sp4;
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
 .scale-list {
+  background: $white;
   border: 1px solid $gray-200;
-  border-radius: $radius-xl;
+  border-radius: $r-2xl;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04);
 
   &--dark {
-    border-color: $dark-border;
+    background: #0f0f0e;
+    border-color: #2a2a28;
+
+    .scale-list__header {
+      background: #161615;
+      border-bottom-color: #2a2a28;
+      color: #666;
+    }
 
     .scale-item {
-      border-bottom-color: $dark-border;
-      background: $dark-bg;
-      &:hover { background: $dark-surface; }
+      border-bottom-color: #1e1e1c;
+      &:hover { background: #161615; }
+      .scale-stop { color: #d0d0ce; }
+      .scale-hex  { color: #555550; }
+    }
 
-      .scale-stop { color: $dark-text; }
-      .scale-hex  { color: $dark-muted; }
+    .contrast-badge {
+      &--pass { background: #052e16; color: #4ade80; }
+      &--fail { background: #2d0a0a; color: #f87171; }
     }
   }
 }
 
-.scale-list-header {
+.scale-list__header {
   display: flex;
   align-items: center;
-  gap: $space-2;
-  padding: $space-3 $space-4;
-  border-bottom: 1px solid $gray-200;
+  gap: $sp2;
+  padding: $sp3 $sp4;
+  border-bottom: 1px solid $gray-150;
+  background: $gray-50;
   font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .07em;
   color: $gray-400;
-  background: $gray-50;
-
-  .scale-list--dark & {
-    border-bottom-color: $dark-border;
-    background: $dark-surface;
-    color: $dark-muted;
-  }
 }
 
 .scale-item {
   display: flex;
   align-items: center;
-  gap: $space-3;
-  padding: $space-2 $space-4;
+  gap: $sp3;
+  padding: $sp2 + 1 $sp4;
   border-bottom: 1px solid $gray-100;
   cursor: pointer;
-  transition: background $transition-fast;
+  transition: background $t-fast;
 
   &:last-child { border-bottom: none; }
   &:hover { background: $gray-50; }
 }
 
 .scale-swatch {
-  width: 32px;
-  height: 32px;
-  border-radius: $radius-md;
+  width: 30px;
+  height: 30px;
+  border-radius: $r-md;
   flex-shrink: 0;
+  box-shadow: 0 1px 2px rgba(0,0,0,.1);
 }
 
 .scale-stop {
@@ -114,7 +128,7 @@
   font-size: 12px;
   font-weight: 500;
   color: $gray-900;
-  width: 36px;
+  width: 34px;
   flex-shrink: 0;
 }
 
@@ -129,16 +143,11 @@
 .contrast-badge {
   font-size: 10px;
   font-family: $font-mono;
-  font-weight: 500;
-  padding: 2px $space-2;
+  font-weight: 600;
+  padding: 2px $sp2;
   border-radius: 20px;
   flex-shrink: 0;
 
   &--pass { background: #ecfdf5; color: #059669; }
   &--fail { background: #fef2f2; color: #dc2626; }
-
-  .scale-list--dark & {
-    &--pass { background: #052e16; color: #4ade80; }
-    &--fail { background: #450a0a; color: #f87171; }
-  }
 }

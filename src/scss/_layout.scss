@@ -1,22 +1,45 @@
 @use 'variables' as *;
-// ── App wrapper ───────────────────────────────────────────────────────────────
-.app {
-  max-width: 880px;
-  margin: 0 auto;
-  padding: $space-8 $space-6;
 
-  @media (max-width: 640px) {
-    padding: $space-5 $space-4;
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: $sp8 $sp6 $sp12;
+  @media (max-width: 640px) { padding: $sp5 $sp4 $sp8; }
+}
+
+.page-header {
+  margin-bottom: $sp8;
+  border-bottom: 1px solid $gray-200;
+  padding-bottom: $sp6;
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -.03em;
+    color: $gray-900;
+    margin-bottom: 3px;
+  }
+  &__sub {
+    font-size: 13px;
+    color: $gray-400;
   }
 }
 
-// ── Two-column grid ───────────────────────────────────────────────────────────
 .two-col {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: $space-4;
+  gap: $sp4;
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
 
-  @media (max-width: 580px) {
-    grid-template-columns: 1fr;
-  }
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: $gray-400;
+  margin-bottom: $sp3;
+  display: flex;
+  align-items: center;
+  gap: $sp1 + 2;
 }

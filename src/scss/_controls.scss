@@ -1,30 +1,36 @@
 @use 'variables' as *;
-// ── Top controls bar ──────────────────────────────────────────────────────────
+
 .controls {
   display: flex;
   align-items: flex-end;
-  gap: $space-4;
+  gap: $sp4;
   flex-wrap: wrap;
-  margin-bottom: $space-6;
+  margin-bottom: $sp6;
+  padding: $sp4 $sp5;
+  background: $white;
+  border: 1px solid $gray-200;
+  border-radius: $r-2xl;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.03);
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: $space-1 + 2;
+  gap: $sp1 + 1;
 
   &__label {
-    font-size: 12px;
-    color: $gray-400;
+    font-size: 11px;
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: $gray-400;
   }
 
-  // Color picker thumb
   &--color {
     .color-thumb-wrap {
       position: relative;
-      width: 52px;
-      height: 38px;
+      width: 44px;
+      height: 40px;
 
       input[type="color"] {
         position: absolute;
@@ -33,79 +39,97 @@
         cursor: pointer;
         width: 100%;
         height: 100%;
+        padding: 0;
+        border: none;
       }
 
       .color-thumb {
-        width: 52px;
-        height: 38px;
-        border-radius: $radius-lg;
-        border: 1px solid rgba(0,0,0,.1);
+        width: 44px;
+        height: 40px;
+        border-radius: $r-lg;
+        border: 1px solid rgba(0,0,0,.08);
         pointer-events: none;
-        transition: background $transition-fast;
+        transition: background $t-fast;
+        box-shadow: 0 1px 3px rgba(0,0,0,.12);
       }
     }
   }
 
-  // Hex text input
   &--hex {
     .hex-input {
-      height: 38px;
-      width: 200px;
-      padding: 0 $space-3;
+      height: 40px;
+      width: 148px;
+      padding: 0 $sp3;
       border: 1px solid $gray-200;
-      border-radius: $radius-lg;
+      border-radius: $r-lg;
       font-family: $font-mono;
       font-size: 14px;
+      font-weight: 500;
       color: $gray-900;
-      background: $white;
-      transition: border-color $transition-fast;
+      background: $gray-50;
+      transition: border-color $t-fast, background $t-fast;
+      text-transform: uppercase;
 
       &:focus {
         border-color: $gray-400;
-      }
-
-      @media (max-width: 480px) {
-        width: 140px;
+        background: $white;
       }
     }
   }
 
-  // Action buttons group
+  &--hsl {
+    .hsl-val {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      font-family: $font-mono;
+      color: $gray-400;
+      padding: 0 $sp1;
+      white-space: nowrap;
+    }
+  }
+
   &--actions {
     flex-direction: row;
     align-items: flex-end;
-    gap: $space-2;
+    gap: $sp2;
     margin-left: auto;
-
-    @media (max-width: 640px) {
-      margin-left: 0;
-    }
+    @media (max-width: 640px) { margin-left: 0; }
   }
 }
 
 // ── Buttons ───────────────────────────────────────────────────────────────────
 .btn {
-  height: 38px;
-  padding: 0 $space-5;
-  border-radius: $radius-lg;
-  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $sp2;
+  height: 40px;
+  padding: 0 $sp4 + 2;
+  border-radius: $r-lg;
+  font-size: 13px;
   font-weight: 500;
-  transition: opacity $transition-fast, background $transition-fast;
   white-space: nowrap;
+  transition: opacity $t-fast, background $t-fast, box-shadow $t-fast;
+  letter-spacing: -.01em;
 
   &--primary {
     background: $gray-900;
     color: $white;
     border: 1px solid $gray-900;
+    box-shadow: 0 1px 2px rgba(0,0,0,.18);
 
     &:hover { opacity: .82; }
+    &:active { transform: scale(.98); }
   }
 
   &--secondary {
     background: $white;
-    color: $gray-900;
+    color: $gray-700;
     border: 1px solid $gray-200;
+    box-shadow: 0 1px 2px rgba(0,0,0,.04);
 
-    &:hover { background: $gray-50; }
+    &:hover { background: $gray-50; border-color: $gray-300; }
   }
 }

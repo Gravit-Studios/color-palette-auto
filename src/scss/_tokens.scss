@@ -1,33 +1,38 @@
 @use 'variables' as *;
-// ── Token table ───────────────────────────────────────────────────────────────
-.tokens-section {
-  .col-heading {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .07em;
-    text-transform: uppercase;
-    color: $gray-400;
-    margin-bottom: $space-3;
-  }
+
+.tokens-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $sp4;
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+.col-heading {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: $gray-400;
+  margin-bottom: $sp3;
 }
 
 .token-table {
+  background: $white;
   border: 1px solid $gray-200;
-  border-radius: $radius-xl;
+  border-radius: $r-2xl;
   overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,.04);
 
   &--dark {
-    border-color: $dark-border;
+    background: #0f0f0e;
+    border-color: #2a2a28;
 
     .token-row {
-      border-bottom-color: $dark-border;
-      background: $dark-bg;
-
-      &:hover { background: $dark-surface; }
-
-      .token-name { color: $dark-text; }
-      .token-desc { color: $dark-muted; }
-      .token-hex  { color: $dark-muted; }
+      border-bottom-color: #1e1e1c;
+      &:hover { background: #161615; }
+      .token-name { color: #f0f0ed; }
+      .token-desc { color: #444440; }
+      .token-hex  { color: #444440; }
     }
   }
 }
@@ -37,29 +42,29 @@
   align-items: center;
   border-bottom: 1px solid $gray-100;
   cursor: pointer;
-  transition: background $transition-fast;
+  transition: background $t-fast;
 
   &:last-child { border-bottom: none; }
   &:hover { background: $gray-50; }
 }
 
 .token-swatch {
-  width: 52px;
-  height: 48px;
+  width: 50px;
+  height: 46px;
   flex-shrink: 0;
 }
 
 .token-info {
   flex: 1;
-  padding: 0 $space-4;
+  padding: 0 $sp4;
 }
 
 .token-name {
-  font-size: 13px;
+  font-family: $font-mono;
+  font-size: 12px;
   font-weight: 500;
   color: $gray-900;
-  margin-bottom: 1px;
-  font-family: $font-mono;
+  margin-bottom: 2px;
 }
 
 .token-desc {
@@ -68,8 +73,9 @@
 }
 
 .token-hex {
-  font-size: 12px;
   font-family: $font-mono;
+  font-size: 11px;
   color: $gray-400;
-  padding: 0 $space-4;
+  padding: 0 $sp4;
+  text-transform: uppercase;
 }

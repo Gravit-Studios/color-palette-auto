@@ -1,19 +1,17 @@
 @use 'variables' as *;
-// ── Preview cards ─────────────────────────────────────────────────────────────
+
 .preview-duo {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: $space-4;
-
-  @media (max-width: 580px) {
-    grid-template-columns: 1fr;
-  }
+  gap: $sp4;
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
 }
 
 .prev-card {
-  border-radius: $radius-xl;
-  padding: $space-5;
+  border-radius: $r-2xl;
+  padding: $sp5;
   border: 1px solid transparent;
+  box-shadow: 0 2px 8px rgba(0,0,0,.07), 0 0 0 0.5px rgba(0,0,0,.04);
 }
 
 .prev-mode-label {
@@ -21,14 +19,14 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .08em;
-  margin-bottom: $space-4;
-  opacity: .5;
+  margin-bottom: $sp4;
+  opacity: .45;
 }
 
 .prev-inner {
-  border-radius: $radius-lg;
-  padding: $space-3 + 2 $space-4;
-  margin-bottom: $space-3;
+  border-radius: $r-lg;
+  padding: $sp4;
+  margin-bottom: $sp3;
   border: 1px solid transparent;
 }
 
@@ -36,51 +34,53 @@
   font-size: 14px;
   font-weight: 600;
   margin-bottom: 3px;
+  letter-spacing: -.01em;
 }
 
 .prev-sub {
   font-size: 12px;
-  margin-bottom: $space-3;
+  margin-bottom: $sp3;
+  line-height: 1.55;
 }
 
 .prev-tags {
   display: flex;
-  gap: $space-1 + 2;
+  gap: $sp1 + 2;
 }
 
 .tag {
   font-size: 11px;
   font-weight: 500;
-  padding: 2px $space-2 + 2;
+  padding: 2px 9px;
   border-radius: 20px;
 }
 
 .prev-actions {
   display: flex;
   flex-direction: column;
-  gap: $space-2;
-  margin-bottom: $space-3;
+  gap: $sp2;
+  margin-bottom: $sp3;
 }
 
 .prev-btn {
   width: 100%;
-  padding: $space-2 + 2 0;
-  border-radius: $radius-lg;
+  padding: 9px 0;
+  border-radius: $r-lg;
   font-size: 13px;
   font-weight: 500;
-  border: 1px solid transparent;
-  transition: opacity $transition-fast;
-
-  &:hover { opacity: .85; }
+  border: 1.5px solid transparent;
+  transition: opacity $t-fast;
+  letter-spacing: -.01em;
+  &:hover { opacity: .82; }
   &--outline { background: transparent !important; }
 }
 
 .prev-avatar-row {
   display: flex;
   align-items: center;
-  gap: $space-3;
-  padding: $space-3;
-  border-radius: $radius-lg;
+  gap: $sp3;
+  padding: $sp3;
+  border-radius: $r-lg;
 }
 
 .prev-avatar {
@@ -95,5 +95,5 @@
   flex-shrink: 0;
 }
 
-.prev-avatar-name { font-size: 13px; font-weight: 500; }
-.prev-avatar-role { font-size: 11px; opacity: .55; }
+.prev-avatar-name { font-size: 13px; font-weight: 500; margin-bottom: 1px; }
+.prev-avatar-role { font-size: 11px; opacity: .5; }
