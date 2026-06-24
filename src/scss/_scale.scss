@@ -1,0 +1,144 @@
+@use 'variables' as *;
+// ── Color band ────────────────────────────────────────────────────────────────
+.band-wrap {
+  margin-bottom: $space-6;
+}
+
+.band-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: $gray-400;
+  margin-bottom: $space-2;
+  display: flex;
+  align-items: center;
+  gap: $space-1 + 2;
+}
+
+.band {
+  display: flex;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  height: 56px;
+  gap: 0;
+}
+
+.band-swatch {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding-bottom: $space-1 + 2;
+  cursor: pointer;
+  transition: flex .18s ease;
+  position: relative;
+
+  &:hover { flex: 2.2; }
+
+  .band-stop {
+    font-size: 9px;
+    font-weight: 700;
+    font-family: $font-mono;
+    opacity: 0;
+    transition: opacity .15s;
+    letter-spacing: .02em;
+  }
+
+  &:hover .band-stop { opacity: 1; }
+}
+
+// ── Scale list ────────────────────────────────────────────────────────────────
+.scale-list {
+  border: 1px solid $gray-200;
+  border-radius: $radius-xl;
+  overflow: hidden;
+
+  &--dark {
+    border-color: $dark-border;
+
+    .scale-item {
+      border-bottom-color: $dark-border;
+      background: $dark-bg;
+      &:hover { background: $dark-surface; }
+
+      .scale-stop { color: $dark-text; }
+      .scale-hex  { color: $dark-muted; }
+    }
+  }
+}
+
+.scale-list-header {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  border-bottom: 1px solid $gray-200;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: $gray-400;
+  background: $gray-50;
+
+  .scale-list--dark & {
+    border-bottom-color: $dark-border;
+    background: $dark-surface;
+    color: $dark-muted;
+  }
+}
+
+.scale-item {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-2 $space-4;
+  border-bottom: 1px solid $gray-100;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $gray-50; }
+}
+
+.scale-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: $radius-md;
+  flex-shrink: 0;
+}
+
+.scale-stop {
+  font-family: $font-mono;
+  font-size: 12px;
+  font-weight: 500;
+  color: $gray-900;
+  width: 36px;
+  flex-shrink: 0;
+}
+
+.scale-hex {
+  font-family: $font-mono;
+  font-size: 12px;
+  color: $gray-400;
+  flex: 1;
+  text-transform: uppercase;
+}
+
+.contrast-badge {
+  font-size: 10px;
+  font-family: $font-mono;
+  font-weight: 500;
+  padding: 2px $space-2;
+  border-radius: 20px;
+  flex-shrink: 0;
+
+  &--pass { background: #ecfdf5; color: #059669; }
+  &--fail { background: #fef2f2; color: #dc2626; }
+
+  .scale-list--dark & {
+    &--pass { background: #052e16; color: #4ade80; }
+    &--fail { background: #450a0a; color: #f87171; }
+  }
+}

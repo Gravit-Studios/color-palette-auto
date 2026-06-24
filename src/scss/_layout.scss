@@ -1,0 +1,22 @@
+@use 'variables' as *;
+// ── App wrapper ───────────────────────────────────────────────────────────────
+.app {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: $space-8 $space-6;
+
+  @media (max-width: 640px) {
+    padding: $space-5 $space-4;
+  }
+}
+
+// ── Two-column grid ───────────────────────────────────────────────────────────
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+
+  @media (max-width: 580px) {
+    grid-template-columns: 1fr;
+  }
+}

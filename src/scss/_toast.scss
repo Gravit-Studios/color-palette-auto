@@ -1,0 +1,22 @@
+@use 'variables' as *;
+// ── Toast notification ────────────────────────────────────────────────────────
+.toast {
+  position: fixed;
+  bottom: $space-5;
+  right: $space-5;
+  background: $gray-900;
+  color: $white;
+  padding: $space-2 + 2 $space-4;
+  border-radius: $radius-lg;
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(6px);
+  transition: opacity .2s, transform .2s;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

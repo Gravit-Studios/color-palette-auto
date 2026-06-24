@@ -1,0 +1,79 @@
+@use 'variables' as *;
+// ── Export section ────────────────────────────────────────────────────────────
+.format-pills {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+  margin-bottom: $space-4;
+}
+
+.pill {
+  height: 32px;
+  padding: 0 $space-4;
+  border-radius: 20px;
+  background: $gray-100;
+  border: 1px solid $gray-200;
+  color: $gray-500;
+  font-size: 13px;
+  transition: all $transition-fast;
+  cursor: pointer;
+
+  &:hover {
+    background: $gray-200;
+    color: $gray-900;
+  }
+
+  &.is-active {
+    background: $gray-900;
+    color: $white;
+    border-color: $gray-900;
+  }
+}
+
+.code-wrap {
+  position: relative;
+}
+
+.copy-btn {
+  position: absolute;
+  top: $space-3;
+  right: $space-3;
+  height: 28px;
+  padding: 0 $space-3;
+  border-radius: $radius-md;
+  font-size: 12px;
+  font-weight: 500;
+  background: $white;
+  border: 1px solid $gray-200;
+  color: $gray-500;
+  transition: all $transition-fast;
+  z-index: 1;
+
+  &:hover {
+    color: $gray-900;
+    border-color: $gray-400;
+  }
+}
+
+.export-area {
+  background: $gray-50;
+  border: 1px solid $gray-200;
+  border-radius: $radius-xl;
+  padding: $space-5;
+  font-family: $font-mono;
+  font-size: 12px;
+  color: $gray-500;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-break: break-all;
+  max-height: 420px;
+  overflow-y: auto;
+  outline: none;
+
+  &::-webkit-scrollbar { width: 4px; }
+  &::-webkit-scrollbar-track { background: transparent; }
+  &::-webkit-scrollbar-thumb {
+    background: $gray-200;
+    border-radius: 4px;
+  }
+}

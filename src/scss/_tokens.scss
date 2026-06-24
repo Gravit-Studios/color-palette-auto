@@ -1,0 +1,75 @@
+@use 'variables' as *;
+// ── Token table ───────────────────────────────────────────────────────────────
+.tokens-section {
+  .col-heading {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: $gray-400;
+    margin-bottom: $space-3;
+  }
+}
+
+.token-table {
+  border: 1px solid $gray-200;
+  border-radius: $radius-xl;
+  overflow: hidden;
+
+  &--dark {
+    border-color: $dark-border;
+
+    .token-row {
+      border-bottom-color: $dark-border;
+      background: $dark-bg;
+
+      &:hover { background: $dark-surface; }
+
+      .token-name { color: $dark-text; }
+      .token-desc { color: $dark-muted; }
+      .token-hex  { color: $dark-muted; }
+    }
+  }
+}
+
+.token-row {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid $gray-100;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:last-child { border-bottom: none; }
+  &:hover { background: $gray-50; }
+}
+
+.token-swatch {
+  width: 52px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.token-info {
+  flex: 1;
+  padding: 0 $space-4;
+}
+
+.token-name {
+  font-size: 13px;
+  font-weight: 500;
+  color: $gray-900;
+  margin-bottom: 1px;
+  font-family: $font-mono;
+}
+
+.token-desc {
+  font-size: 11px;
+  color: $gray-400;
+}
+
+.token-hex {
+  font-size: 12px;
+  font-family: $font-mono;
+  color: $gray-400;
+  padding: 0 $space-4;
+}

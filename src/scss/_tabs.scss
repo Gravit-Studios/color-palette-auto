@@ -1,0 +1,34 @@
+@use 'variables' as *;
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+.tabs {
+  display: flex;
+  border-bottom: 1px solid $gray-200;
+  margin-bottom: $space-6;
+  gap: 0;
+}
+
+.tab {
+  padding: $space-2 + 2 $space-4;
+  font-size: 14px;
+  color: $gray-400;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: color $transition-fast, border-color $transition-fast;
+  cursor: pointer;
+
+  &:hover {
+    color: $gray-900;
+  }
+
+  &.is-active {
+    color: $gray-900;
+    border-bottom-color: $gray-900;
+    font-weight: 500;
+  }
+}
+
+.tab-content {
+  &.is-hidden { display: none; }
+}
